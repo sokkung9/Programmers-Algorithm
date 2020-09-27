@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Solution {
+	public int[] solution(int[] answers) {
+		//배열 담을 list
+		List<Integer[]> list = new ArrayList<>();
+
+		//찍을 답
+		int[][] students = new int[][] {
+			{1, 2, 3, 4, 5},
+			{2, 1, 2, 3, 2, 4, 2, 5},
+			{3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
+		};
+		
+		int[] scores = new int[3];
+		
+		// 점수 계산
+		for (int i=0; i<answers.length; i++) {
+			int[] step_scores = _step(answers, students, i);
+			
+			for (int j=0; j<3; j++) {
+				scores[j] += step_scores[j];
+			}
+		}
+		
+		// 가장 높은 점수 구하기
+		int max = 0;
+		for (int i=0; i<3; i++) {
+			if (max < scores[i]) {
+				max = scores[i];
+			}
+		}
+		
+		// 가장 높은 점수를 가진 사람 구하기
+		List<Integer> answer_list = new ArrayList<>();
+		for (int i=0; i<3; i++) {
+			if (max == scores[i]) {
+				answer_list.add(i+1);
+			}
+		}
+				
+		int[] answer = new int[answer_list.size()];
+		for (int i=0; i<answer_list.size(); i++) {
+			answer[i] = answer_list.get(i);
+		}
+		
+        return answer;
+    }
+	
+	private int[] _step(int[] answers, int[][] students, int idx) {
+		int[] scores = new int[] {0, 0, 0};
+		for (int i=0; i<3; i++) {
+			int[] student = students[i];
+			int s_idx = idx % student.length;
+			// 답 비교
+			if (answers[idx] == student[s_idx]) {
+				scores[i] = 1;
+			}
+		}
+		
+		return scores;
+	}
+}
