@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+	public int[] solution(int []arr) {
+		//현재값, 다음값 비교
+		for(int i = 0; i < arr.length-1; i++) {
+			if(arr[i] == arr[i+1]) {
+				arr[i] = -1;
+			}
+		}
+		//list에 중복 아닌 값 저장
+		List<Integer> list = new ArrayList<>();
+		for(int i = 0; i < arr.length; i++) {
+			if(arr[i] != -1) {
+				list.add(arr[i]);
+			}
+		}
+		
+		int[] answer = new int[list.size()];
+		for(int i = 0; i < answer.length; i++) {
+			answer[i] = list.get(i);
+		}
+        return answer;
+    }
+}
