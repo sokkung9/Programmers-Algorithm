@@ -1,0 +1,23 @@
+public class Solution {
+
+	static boolean solution(String s) {
+        int cnt = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+        	if (String.valueOf(s.charAt(i)).equalsIgnoreCase("p")) {
+        		cnt++;
+        		continue;
+        	}
+        	if (String.valueOf(s.charAt(i)).equalsIgnoreCase("y")) {
+        		cnt--;
+        		continue;
+        	}
+        }
+        if (cnt == 0)
+        	return true;
+        
+        return false;
+	}
+
+
+}
